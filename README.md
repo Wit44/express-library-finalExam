@@ -1,2 +1,15 @@
-# express-library-finalExam
-Backend app code for the final exam in SASE Vladimir Milosavljevic 2021230123
+# backend
+
+To install dependencies:
+
+```bash
+bun install
+```
+
+To run:
+
+```bash
+bun run src/index.ts
+```
+
+This project was created using `bun init` in bun v1.2.5. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
