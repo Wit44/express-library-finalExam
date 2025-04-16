@@ -22,6 +22,9 @@ export class Order {
   @Column("int", { name: "user_id", unsigned: true })
   userId: number;
 
+  @Column("varchar", { name: "delivery", length: 255 })
+  delivery: string;
+
   @Column("datetime", {
     name: "created_at",
     default: () => "CURRENT_TIMESTAMP",

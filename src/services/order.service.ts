@@ -8,17 +8,18 @@ export class OrderService {
     static async getOrders(id: number) {
         return await repo.find({
             select: {
-                orderId:true,
+                orderId: true,
                 bookId: true,
                 userId: true,
+                delivery: true,
                 book: {
                     bookId: true,
-                    title:true,
-                    author:true,
-                    price:true
+                    title: true,
+                    author: true,
+                    price: true
                 },
-                createdAt:true,
-                updatedAt:true
+                createdAt: true,
+                updatedAt: true
             },
             where: {
                 userId: id,
@@ -46,7 +47,7 @@ export class OrderService {
         return data
     }
 
-    static async createOrder(user: number, model: Order){
+    static async createOrder(user: number, model: Order) {
         await repo.save({
             userId: user,
             bookId: model.bookId,
@@ -54,15 +55,22 @@ export class OrderService {
         })
     }
 
-    static async updateOrder(user: number,id: number, model: Order){
-        const data = await this.getOrderById(user,id)
-        data.bookId = model.bookId,
-        data.updatedAt = new Date() 
+    static async updateOrder(user: number, id: number, model: Order) {
+        const data = await this.getOrderById(user, id)
+        if (model.bookId !== undefined) {
+            data.bookId = model.bookId;
+        }
+
+        if (model.delivery !== undefined) {
+            data.delivery = model.delivery;
+        }
+        data.updatedAt = new Date()
         await repo.save(data)
     }
 
-    static async deleteOrder(user:number, id: number) {
-        const data = await this.getOrderById(user,id)
+
+    static async deleteOrder(user: number, id: number) {
+        const data = await this.getOrderById(user, id)
         data.deletedAt = new Date()
         await repo.save(data)
     }
