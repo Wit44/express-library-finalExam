@@ -34,7 +34,7 @@ OrderRoute.post('/', async(req: any,res) => {
 OrderRoute.put('/:id', async (req: any, res) => {
     try {
         const id = Number(req.params.id)
-        await OrderService.updateOrder(req.user.id,id, req.body)
+        await OrderService.updateOrder(req.user.id, id, req.body)
         res.status(204).send()
     } catch (e) {
         sendError(res, e)

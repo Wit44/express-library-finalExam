@@ -56,19 +56,14 @@ export class OrderService {
     }
 
     static async updateOrder(user: number, id: number, model: Order) {
-        const data = await this.getOrderById(user, id)
-        if (model.bookId !== undefined) {
-            data.bookId = model.bookId;
-        }
-
-        if (model.delivery !== undefined) {
-            data.delivery = model.delivery;
-        }
+        const data = await this.getOrderById(user,id)
+        data.delivery = model.delivery
+        data.bookId = model.bookId
         data.updatedAt = new Date()
         await repo.save(data)
-    }
+    } 
 
-
+    
     static async deleteOrder(user: number, id: number) {
         const data = await this.getOrderById(user, id)
         data.deletedAt = new Date()
