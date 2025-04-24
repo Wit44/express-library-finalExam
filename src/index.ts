@@ -7,6 +7,8 @@ import { BookRoute } from './routes/book.route'
 import { UserRoute } from './routes/user.route'
 import { UserService } from './services/user.service'
 import { OrderRoute } from './routes/order.route'
+import https from 'https'
+import fs from 'fs'
 
 const app = express()
 app.use(express.json())
@@ -20,12 +22,22 @@ app.use('/api/user', UserRoute)
 app.use('/api/order', OrderRoute)
 
 
+const sslOptions = {
+    key: fs.readFileSync('./src/crypto/key.pem'),
+    cert: fs.readFileSync('./src/crypto/cert.pem')
+}
+
+
 configDotenv()
 AppDatasource.initialize()
     .then(() => {
         console.log('Connected to the database')
         const port = process.env.SERVER_PORT || 5000
-        app.listen(port, () => console.log(`Application started on the port ${port}`))
+
+        https.createServer(sslOptions, app)
+            .listen(port, () => 
+                console.log(`Application started on the port ${port}`)
+        )
     })
     .catch(e => {
         console.log('Database server connection failed')

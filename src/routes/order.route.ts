@@ -22,14 +22,6 @@ OrderRoute.get('/:id', async (req: any,res) => {
     }
 })
 
-OrderRoute.post('/', async(req: any,res) => {
-    try {
-        await OrderService.createOrder(req.user.id, req.body)
-        res.status(204).send()
-    } catch (e) {
-        sendError(res, e)
-    }
-})
 
 OrderRoute.put('/:id', async (req: any, res) => {
     try {

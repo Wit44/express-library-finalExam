@@ -47,13 +47,6 @@ export class OrderService {
         return data
     }
 
-    static async createOrder(user: number, model: Order) {
-        await repo.save({
-            userId: user,
-            bookId: model.bookId,
-            createdAt: new Date()
-        })
-    }
 
     static async updateOrder(user: number, id: number, model: Order) {
         const data = await this.getOrderById(user,id)
