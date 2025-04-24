@@ -1,15 +1,11 @@
-# backend
+# ENV FILE
+SERVER_PORT = 5000
+DATABASE_HOST = 46.240.129.106
+DATABASE_PORT = 8736
+DATABASE_USER = 2021230123
+DATABASE_PASSWORD = 2021230123
+DATABASE_NAME = sase_2021230123
 
-To install dependencies:
-
-```bash
-bun install
-```
-
-To run:
-
-```bash
-bun run src/index.ts
-```
-
-This project was created using `bun init` in bun v1.2.5. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+JWT_SECRET=1b60d2cd-6f51-41bb-a90f-396fe4cdb171
+JWT_ACCESS_TTL=10s
+JWT_REFRESH_TTL=7d
